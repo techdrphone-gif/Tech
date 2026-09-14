@@ -304,13 +304,11 @@ footer{text-align:center;color:#778196;padding:25px 12px}
 </head>
 <body>
 
-<!-- شريط إشعارات التحديث العلوي -->
 <div id="updateBanner" class="update-banner hidden">
-  <span>🔔 تتوفر أجهزة وعروض جديدة في مركز كرم! تفقّد الأقسام الآن.</span>
+  <span id="updateBannerText">🔔 تتوفر أجهزة وعروض جديدة في مركز كرم! تفقد الأقسام الآن.</span>
   <button type="button" onclick="closeUpdateBanner()">إغلاق</button>
 </div>
 
-<!-- زر الواتساب العائم -->
 <a class="whatsapp-float" href="https://wa.me/963930430255?text=مرحباً%20مركز%20كرم،%20أرغب%20بالاستفسار%20عن..." target="_blank" title="تواصل عبر واتساب">💬</a>
 
 <header>
@@ -356,7 +354,6 @@ footer{text-align:center;color:#778196;padding:25px 12px}
   <h2>🛍️ منتجاتنا</h2>
   <p style="color:#687386; margin-bottom:14px;">المنتجات مرتبة ضمن أقسامها لتسهيل الوصول إليها.</p>
 
-  <!-- خانة البحث الفوري عن المنتجات -->
   <input type="text" id="productSearch" class="search-box" placeholder="🔍 ابحث عن أي منتج أو هاتف أو لابتوب..." oninput="filterProducts()">
 
   <div class="category-block">
@@ -388,7 +385,6 @@ footer{text-align:center;color:#778196;padding:25px 12px}
   </div>
 </section>
 
-<!-- قسم آراء الزبائن -->
 <section>
   <h2>⭐ آراء الزبائن الكرام</h2>
   <div class="grid">
@@ -482,23 +478,45 @@ function copyCode(){
 
 const PRODUCTS_KEY='markaz_karam_products_v2';
 const ADMIN_PASSWORD_KEY='markaz_karam_admin_password_v1';
-const UPDATE_NOTICE_KEY='markaz_karam_update_v1';
-const CURRENT_UPDATE_ID='update_2026_v1'; // قم بتغيير هذا المعرف كلما أردت إظهار إشعار جديد للزبائن
 const DEFAULT_ADMIN_PASSWORD='1234';
 
 function currencyLabel(c){return c==='USD'?'$':'ل.س'}
 let editingProductId=null;
 let operationsUnlocked=false;
 
-function checkUpdateBanner(){
-  const lastSeen = localStorage.getItem(UPDATE_NOTICE_KEY);
-  if(lastSeen !== CURRENT_UPDATE_ID){
-    document.getElementById('updateBanner').classList.remove('hidden');
+/* دالة فحص التحديثات المحدثة لتقرأ نص الرسالة مباشرة دون تعقيد */
+async function checkCloudUpdate() {
+  try {
+    const response = await fetch('https://techdrphone-gif.github.io/Tech/update.json?' + new Date().getTime());
+    const data = await response.json();
+    
+    if (data.message) {
+      const lastSeenMessage = localStorage.getItem('last_seen_message');
+      
+      // إذا كان النص جديداً ولم يره المستخدم من قبل، يظهر الإشعار فوراً
+      if (lastSeenMessage !== data.message) {
+        const banner = document.getElementById('updateBanner');
+        const textSpan = document.getElementById('updateBannerText');
+        textSpan.innerText = `🔔 ${data.message}`;
+        banner.classList.remove('hidden');
+      }
+    }
+  } catch (error) {
+    console.log("لا يوجد اتصال لفحص التحديثات");
   }
 }
-function closeUpdateBanner(){
-  localStorage.setItem(UPDATE_NOTICE_KEY, CURRENT_UPDATE_ID);
-  document.getElementById('updateBanner').classList.add('hidden');
+
+function closeUpdateBanner() {
+  fetch('https://techdrphone-gif.github.io/Tech/update.json')
+    .then(res => res.json())
+    .then(data => {
+      if (data.message) {
+        localStorage.setItem('last_seen_message', data.message);
+      }
+      document.getElementById('updateBanner').classList.add('hidden');
+    }).catch(() => {
+      document.getElementById('updateBanner').classList.add('hidden');
+    });
 }
 
 function getProducts(){
@@ -557,7 +575,7 @@ function saveProduct(){
   if(!operationsUnlocked)return;
   const name=document.getElementById('productName').value.trim();
   const price=document.getElementById('productPrice').value.trim();
-  const desc=document.getElementById('productDescription5']||document.getElementById('productDescription').value.trim();
+  const desc=document.getElementById('productDescription').value.trim();
   const category=document.getElementById('productCategory').value;
   const currency=document.getElementById('productCurrency').value;
   const file=document.getElementById('productImage').files[0];
@@ -683,7 +701,7 @@ function changeAdminPassword(){
 
 document.addEventListener('DOMContentLoaded',() => {
   renderProducts();
-  checkUpdateBanner();
+  checkCloudUpdate();
 });
 </script>
 </body>
