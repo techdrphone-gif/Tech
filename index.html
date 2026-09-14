@@ -540,14 +540,24 @@ function toggleTheme() {
   localStorage.setItem('markaz_karam_theme', newTheme);
 }
 
+// دالة موحدة ومتطورة لفتح الأقسام سواء من الواجهة الرئيسية أو القائمة الجانبية
 function openCat(id) {
   const box = document.getElementById(id);
-  if (box.classList.contains('hidden')) {
+  if (box && box.classList.contains('hidden')) {
     box.classList.remove('hidden');
     const btn = box.previousElementSibling;
-    const icon = btn.querySelector('span:last-child');
-    if(icon) icon.textContent = '−';
+    if (btn) {
+      const icon = btn.querySelector('span:last-child');
+      if (icon) icon.textContent = '−';
+    }
   }
+}
+
+function toggleCategory(id, button){
+  const box = document.getElementById(id);
+  const icon = button.querySelector('span:last-child');
+  box.classList.toggle('hidden');
+  if(icon) icon.textContent = box.classList.contains('hidden') ? '＋' : '−';
 }
 
 function copyCode(){
@@ -566,7 +576,6 @@ function currencyLabel(c){return c==='USD'?'$':'ل.س'}
 let editingProductId=null;
 let operationsUnlocked=false;
 
-// جلب المنتجات السحابية مباشرة من ملف products.json مع منع التخزين المؤقت (Cache)
 async function loadCloudProducts() {
   try {
     const response = await fetch(`https://${REPO_OWNER}.github.io/${REPO_NAME}/${PROD_FILE}?` + new Date().getTime());
@@ -751,7 +760,7 @@ function renderCategory(id,category, filterText=''){
   const g=document.getElementById(id);
   let a=globalProducts.filter(p=>(p.category||'mobile')===category);
   if(filterText){
-    a=a.filter(p => (p.name && p.name.toLowerCase().includes(filterText)) || (p.desc && p.desc.toLowerCase().includes(filterText)));
+    a=a.filter(p => (p.name && p.name.toLowerCase().includes(filterTest)) || (p.desc && p.desc.toLowerCase().includes(filterTest)));
   }
   const blockContainer = g.parentElement;
   if(!a.length){
