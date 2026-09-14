@@ -1,0 +1,690 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>مركز كرم | الهواتف واللابتوبات والإكسسوارات</title>
+<meta name="description" content="مركز كرم للهواتف واللابتوبات والإكسسوارات في درعا - مدينة الحارة.">
+<style>
+*{box-sizing:border-box}
+body{margin:0;font-family:Arial,Tahoma,sans-serif;background:#f6f8fb;color:#172033;line-height:1.7}
+
+/* أنيميشن الإطارات الدائرية المضيئة النابضة */
+@keyframes glowingBorder {
+  0% {
+    box-shadow: 0 0 0 0 rgba(37, 99, 235, 0.7), 0 0 0 0 rgba(37, 99, 235, 0.4);
+  }
+  70% {
+    box-shadow: 0 0 0 10px rgba(37, 99, 235, 0), 0 0 0 20px rgba(37, 99, 235, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(37, 99, 235, 0), 0 0 0 0 rgba(37, 99, 235, 0);
+  }
+}
+
+@keyframes whatsappPulse {
+  0% { box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.7); }
+  70% { box-shadow: 0 0 0 15px rgba(34, 197, 94, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(34, 197, 94, 0); }
+}
+
+@keyframes floatAnim {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-5px); }
+}
+
+/* شريط إشعارات التحديث العلوي */
+.update-banner{
+  background:linear-gradient(135deg, #1e3a8a, #2563eb);
+  color:#fff;
+  padding:10px 16px;
+  text-align:center;
+  font-size:14px;
+  font-weight:700;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:12px;
+  position:relative;
+  z-index:11;
+  box-shadow:0 2px 10px rgba(0,0,0,0.15);
+}
+.update-banner button{
+  background:#fff;
+  color:#1e3a8a;
+  border:0;
+  padding:4px 10px;
+  border-radius:8px;
+  cursor:pointer;
+  font-weight:bold;
+  font-size:12px;
+}
+
+header{background:linear-gradient(135deg,#111827,#2563eb);color:#fff;padding:18px 16px;position:sticky;top:0;z-index:10;box-shadow:0 4px 20px rgba(0,0,0,0.1)}
+.nav{max-width:1050px;margin:auto;display:flex;align-items:center;justify-content:space-between;gap:12px}
+.logo{font-size:25px;font-weight:800;letter-spacing:-0.5px}
+
+/* زر الاتصال مع إطار مضيء ودائري */
+.call{
+  background:#fff;
+  color:#1d4ed8;
+  text-decoration:none;
+  padding:9px 16px;
+  border-radius:12px;
+  font-weight:700;
+  position:relative;
+  transition:all 0.3s ease;
+  animation: glowingBorder 2s infinite;
+  border: 2px solid #2563eb;
+}
+.call:hover{background:#2563eb;color:#fff;transform:scale(1.05)}
+
+main{max-width:1050px;margin:auto;padding:20px 14px}
+.hero{background:#fff;border-radius:24px;padding:35px 22px;margin:8px 0 20px;text-align:center;box-shadow:0 8px 30px #0000000b;position:relative;overflow:hidden}
+.badge{display:inline-block;background:#eaf2ff;color:#1d4ed8;padding:6px 14px;border-radius:999px;font-weight:700;animation: floatAnim 3s ease-in-out infinite}
+h1{font-size:34px;margin:14px 0 6px}
+.hero p{color:#596579;max-width:650px;margin:8px auto 18px}
+
+.actions{display:flex;justify-content:center;gap:12px;flex-wrap:wrap}
+
+/* تصميم الأزرار مع إطار مضيء متحرك */
+.btn{
+  display:inline-block;
+  text-decoration:none;
+  border:0;
+  cursor:pointer;
+  padding:12px 20px;
+  border-radius:13px;
+  font-weight:700;
+  font-size:16px;
+  transition:all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position:relative;
+}
+.primary{
+  background:linear-gradient(135deg, #2563eb, #1d4ed8);
+  color:#fff;
+  box-shadow:0 4px 15px rgba(37,99,235,0.3);
+  animation: glowingBorder 2.5s infinite;
+  border: 2px solid rgba(255, 255, 255, 0.4);
+}
+.primary:hover{
+  transform:translateY(-2px);
+  box-shadow:0 6px 25px rgba(37,99,235,0.6);
+}
+.secondary{
+  background:#eef2f7;
+  color:#172033;
+  border: 2px solid #cbd5e1;
+}
+.secondary:hover{
+  background:#dfe6ed;
+  transform:translateY(-2px);
+  border-color:#94a3b8;
+}
+
+section{margin:28px 0}
+h2{font-size:25px;margin-bottom:14px;position:relative;display:inline-block}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:14px}
+
+/* بطاقات مميزة مع تأثير Hover */
+.card{
+  background:#fff;
+  padding:20px;
+  border-radius:18px;
+  box-shadow:0 6px 22px #00000008;
+  border:1px solid #edf0f5;
+  transition:all 0.3s ease;
+}
+.card:hover{
+  transform:translateY(-5px);
+  box-shadow:0 12px 30px rgba(0,0,0,0.08);
+  border-color:#cbd5e1;
+}
+.icon{font-size:32px;transition:transform 0.3s}
+.card:hover .icon{transform:scale(1.1) rotate(5deg)}
+.card h3{margin:8px 0 4px}
+.card p{margin:0;color:#687386}
+
+.pay{background:linear-gradient(135deg, #111827, #1f2937);color:#fff;border-radius:22px;padding:24px;box-shadow:0 10px 30px rgba(0,0,0,0.15)}
+.pay p{color:#d4d9e2}
+.code{direction:ltr;text-align:center;background:#fff;color:#111827;padding:14px;border-radius:12px;font-weight:800;letter-spacing:1px;word-break:break-all;margin:14px 0;box-shadow:inset 0 2px 4px rgba(0,0,0,0.06)}
+.copy{
+  background:#2563eb;
+  color:#fff;
+  width:100%;
+  animation: glowingBorder 3s infinite;
+  border: 2px solid #60a5fa;
+}
+
+.contact{background:#eaf2ff;border-radius:22px;padding:24px;text-align:center;border:1px solid #dbeafe}
+.phone{font-size:26px;font-weight:800;color:#1d4ed8;direction:ltr;display:inline-block;margin:6px}
+footer{text-align:center;color:#778196;padding:25px 12px}
+
+/* تنسيق الإضافات الجديدة */
+.whatsapp-float{
+  position:fixed;
+  bottom:25px;
+  left:25px;
+  background:#22c55e;
+  color:#fff;
+  width:60px;
+  height:60px;
+  border-radius:50%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:32px;
+  box-shadow:0 6px 20px rgba(34,197,94,0.4);
+  z-index:99;
+  text-decoration:none;
+  animation: whatsappPulse 2s infinite;
+  transition:transform 0.3s;
+}
+.whatsapp-float:hover{transform:scale(1.1)}
+
+.search-box{
+  width:100%;
+  padding:14px 18px;
+  border:2px solid #cbd5e1;
+  border-radius:14px;
+  font-size:16px;
+  margin-bottom:20px;
+  outline:none;
+  transition:border-color 0.3s, box-shadow 0.3s;
+  background:#fff;
+}
+.search-box:focus{
+  border-color:#2563eb;
+  box-shadow:0 0 0 4px rgba(37,99,235,0.1);
+}
+
+.status-badge{
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  background:#dcfce7;
+  color:#15803d;
+  padding:6px 14px;
+  border-radius:999px;
+  font-weight:700;
+  font-size:14px;
+  margin-bottom:12px;
+}
+.status-dot{
+  width:10px;
+  height:10px;
+  background:#22c55e;
+  border-radius:50%;
+  box-shadow:0 0 0 3px rgba(34,197,94,0.3);
+}
+
+@media(max-width:520px){
+  h1{font-size:29px}
+  .nav{align-items:center}
+  .logo{font-size:21px}
+  .call{padding:8px 10px;font-size:14px}
+  .whatsapp-float{width:50px;height:50px;font-size:26px;bottom:15px;left:15px;}
+}
+
+/* إدارة المنتجات وغرفة العمليات */
+.products-toolbar{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:14px}
+.admin-panel{background:#fff;border:1px solid #e5eaf2;border-radius:20px;padding:18px;box-shadow:0 6px 22px #00000008}
+.admin-form{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:10px}
+.admin-form input,.admin-form textarea,.admin-form select{width:100%;padding:12px;border:1px solid #d9e0ea;border-radius:12px;font:inherit;transition:border-color 0.3s}
+.admin-form input:focus, .admin-form textarea:focus, .admin-form select:focus{border-color:#2563eb;outline:none;box-shadow:0 0 0 3px rgba(37,99,235,0.1)}
+.admin-form textarea{min-height:90px;resize:vertical}
+.admin-form .full{grid-column:1/-1}
+
+.product-card{position:relative;overflow:hidden}
+.product-img{width:100%;height:170px;object-fit:cover;border-radius:13px;background:#eef2f7;transition:transform 0.5s}
+.product-card:hover .product-img{transform:scale(1.03)}
+.product-price{font-size:20px;font-weight:800;color:#1d4ed8;margin:8px 0}
+.product-actions{display:flex;gap:8px;margin-top:12px}
+.small-btn{padding:9px 12px;border:0;border-radius:10px;font-weight:700;cursor:pointer;transition:all 0.2s}
+.small-btn:hover{opacity:0.85;transform:scale(1.05)}
+.edit-btn{background:#eef2f7;color:#172033}
+.delete-btn{background:#fee2e2;color:#991b1b}
+.empty-products{text-align:center;color:#687386;padding:20px}
+
+.category-block{margin:22px 0 30px}
+.category-toggle{
+  width:100%;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  border:2px solid #bfdbfe;
+  background:#eef4ff;
+  color:#172033;
+  border-radius:14px;
+  padding:12px 16px;
+  font:inherit;
+  font-size:18px;
+  font-weight:800;
+  cursor:pointer;
+  text-align:right;
+  transition:all 0.3s;
+}
+.category-toggle:hover{background:#dfe9ff;border-color:#2563eb}
+.category-toggle .toggle-icon{
+  width:30px;
+  height:30px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background:#fff;
+  border-radius:50%;
+  font-size:22px;
+  color:#2563eb;
+  transition:transform 0.3s;
+}
+.category-products{margin-top:12px}
+.currency-label{font-size:14px;color:#687386;margin-right:5px}
+
+.operations-area{margin-top:35px;text-align:center}
+.operations-link{
+  border:2px solid #cbd5e1;
+  background:#fff;
+  color:#596579;
+  padding:10px 18px;
+  border-radius:12px;
+  font-weight:700;
+  cursor:pointer;
+  transition:all 0.3s;
+}
+.operations-link:hover{background:#f8fafc;color:#111827;border-color:#2563eb}
+
+.operations-panel{margin-top:12px;background:#fff;border:1px solid #e5eaf2;border-radius:20px;padding:18px;text-align:right;box-shadow:0 6px 22px #00000008}
+.operations-panel input,.operations-panel textarea,.operations-panel select{width:100%;padding:12px;border:1px solid #d9e0ea;border-radius:12px;font:inherit;background:#fff}
+.operations-head{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:14px}
+.admin-message{margin:10px 0 0;color:#596579;font-weight:600}
+.admin-list-item{display:flex;justify-content:space-between;align-items:center;gap:8px;padding:10px 0;border-bottom:1px solid #edf0f5}
+
+.hidden{display:none!important}
+</style>
+</head>
+<body>
+
+<!-- شريط إشعارات التحديث العلوي -->
+<div id="updateBanner" class="update-banner hidden">
+  <span>🔔 تتوفر أجهزة وعروض جديدة في مركز كرم! تفقّد الأقسام الآن.</span>
+  <button type="button" onclick="closeUpdateBanner()">إغلاق</button>
+</div>
+
+<!-- زر الواتساب العائم -->
+<a class="whatsapp-float" href="https://wa.me/963930430255?text=مرحباً%20مركز%20كرم،%20أرغب%20بالاستفسار%20عن..." target="_blank" title="تواصل عبر واتساب">💬</a>
+
+<header>
+  <div class="nav">
+    <div class="logo">📱 مركز كرم</div>
+    <a class="call" href="tel:0930430255">اتصل الآن</a>
+  </div>
+</header>
+
+<main>
+<section class="hero">
+  <div class="status-badge"><span class="status-dot"></span> المركز مفتوح الآن لاستقبالكم</div>
+  <span class="badge">وجهتك التقنية الموثوقة</span>
+  <h1>مركز كرم</h1>
+  <p>وجهتك للهواتف، اللابتوبات والإكسسوارات مع خدمة موثوقة وتجربة شراء مميزة.</p>
+  <div class="actions">
+    <a class="btn primary" href="tel:0930430255">📞 تواصل معنا الآن</a>
+    <a class="btn secondary" href="#payment">💳 طرق الدفع</a>
+  </div>
+  <p style="margin-top:20px;">📍 درعا – مدينة الحارة</p>
+</section>
+
+<section>
+<h2>أقسام مركز كرم</h2>
+<div class="grid">
+  <article class="card"><div class="icon">📱</div><h3>الموبايلات</h3><p>أحدث الهواتف والخيارات المناسبة لاحتياجاتك.</p></article>
+  <article class="card"><div class="icon">💻</div><h3>اللابتوبات</h3><p>أجهزة للعمل والدراسة والاستخدام اليومي.</p></article>
+  <article class="card"><div class="icon">🎧</div><h3>الإكسسوارات</h3><p>إكسسوارات ومستلزمات للموبايلات والأجهزة.</p></article>
+  <article class="card"><div class="icon">📲</div><h3>شحن جميع التطبيقات والبرامج</h3><p>خدمة شحن للتطبيقات والبرامج حسب طلبك.</p></article>
+</div>
+</section>
+
+<section>
+<h2>خدماتنا</h2>
+<div class="grid">
+  <article class="card"><div class="icon">🛠️</div><h3>صيانة</h3><p>خدمة ومتابعة للأجهزة حسب الحاجة.</p></article>
+  <article class="card"><div class="icon">🛡️</div><h3>ضمان</h3><p>اهتمام بخدمة ما بعد البيع والضمان.</p></article>
+  <article class="card"><div class="icon">🤝</div><h3>استشارة</h3><p>نساعدك باختيار الجهاز المناسب لميزانيتك.</p></article>
+</div>
+</section>
+
+<section id="products">
+  <h2>🛍️ منتجاتنا</h2>
+  <p style="color:#687386; margin-bottom:14px;">المنتجات مرتبة ضمن أقسامها لتسهيل الوصول إليها.</p>
+
+  <!-- خانة البحث الفوري عن المنتجات -->
+  <input type="text" id="productSearch" class="search-box" placeholder="🔍 ابحث عن أي منتج أو هاتف أو لابتوب..." oninput="filterProducts()">
+
+  <div class="category-block">
+    <button class="category-toggle" type="button" onclick="toggleCategory('mobileProducts',this)">
+      <span>📱 الموبايلات</span><span class="toggle-icon">＋</span>
+    </button>
+    <div id="mobileProducts" class="grid category-products hidden"></div>
+  </div>
+
+  <div class="category-block">
+    <button class="category-toggle" type="button" onclick="toggleCategory('laptopProducts',this)">
+      <span>💻 اللابتوبات</span><span class="toggle-icon">＋</span>
+    </button>
+    <div id="laptopProducts" class="grid category-products hidden"></div>
+  </div>
+
+  <div class="category-block">
+    <button class="category-toggle" type="button" onclick="toggleCategory('accessoryProducts',this)">
+      <span>🎧 الإكسسوارات</span><span class="toggle-icon">＋</span>
+    </button>
+    <div id="accessoryProducts" class="grid category-products hidden"></div>
+  </div>
+
+  <div class="category-block">
+    <button class="category-toggle" type="button" onclick="toggleCategory('rechargeProducts',this)">
+      <span>📲 شحن جميع التطبيقات والبرامج</span><span class="toggle-icon">＋</span>
+    </button>
+    <div id="rechargeProducts" class="grid category-products hidden"></div>
+  </div>
+</section>
+
+<!-- قسم آراء الزبائن -->
+<section>
+  <h2>⭐ آراء الزبائن الكرام</h2>
+  <div class="grid">
+    <article class="card"><div class="icon">💬</div><h3>أحمد الحوراني</h3><p>"خدمة ممتازة وأسعار منافسة جداً، شكراً لتعاملكم الراقي."</p></article>
+    <article class="card"><div class="icon">💬</div><h3>محمود العلي</h3><p>"اشتريت لابتوب للدراسة وكانت المعاملة والكفالة ممتازة."</p></article>
+    <article class="card"><div class="icon">💬</div><h3>خالد الزعبي</h3><p>"أفضل مركز صيانة وشحن تطبيقات في مدينة الحارة."</p></article>
+  </div>
+</section>
+
+<section id="operations" class="operations-area">
+  <button class="operations-link" type="button" onclick="openOperations()">🔐 غرفة العمليات</button>
+
+  <div id="operationsLogin" class="operations-panel hidden">
+    <h3>🔐 دخول غرفة العمليات</h3>
+    <p>هذه الصفحة للإدارة فقط.</p>
+    <input id="adminPassword" type="password" inputmode="numeric" placeholder="كلمة مرور الإدارة">
+    <button class="btn primary" type="button" style="margin-top:10px;" onclick="adminLogin()">دخول</button>
+    <p id="loginMessage" class="admin-message"></p>
+  </div>
+
+  <div id="operationsPanel" class="operations-panel hidden">
+    <div class="operations-head">
+      <h3>⚙️ غرفة عمليات مركز كرم</h3>
+      <button class="small-btn delete-btn" type="button" onclick="adminLogout()">تسجيل الخروج</button>
+    </div>
+
+    <div class="admin-form">
+      <input id="productName" placeholder="اسم المنتج">
+      <input id="productPrice" placeholder="السعر مثال: 150000 أو 10">
+
+      <select id="productCurrency">
+        <option value="SYP">🇸🇾 ليرة سورية</option>
+        <option value="USD">🇺🇸 دولار أمريكي ($)</option>
+      </select>
+
+      <select id="productCategory">
+        <option value="mobile">📱 الموبايلات</option>
+        <option value="laptop">💻 اللابتوبات</option>
+        <option value="accessory">🎧 الإكسسوارات</option>
+        <option value="recharge">📲 شحن التطبيقات والبرامج</option>
+      </select>
+
+      <input id="productImage" type="file" accept="image/*">
+      <textarea id="productDescription" class="full" placeholder="وصف المنتج (اختياري)"></textarea>
+
+      <button class="btn primary" type="button" onclick="saveProduct()">💾 حفظ المنتج</button>
+      <button class="btn secondary" type="button" onclick="cancelEdit()">إلغاء</button>
+    </div>
+
+    <p id="adminMessage" class="admin-message"></p>
+    <div class="admin-form" style="margin-top:14px">
+      <input id="newAdminPassword" type="password" inputmode="numeric" placeholder="كلمة مرور جديدة (اختياري)">
+      <button class="btn secondary" type="button" onclick="changeAdminPassword()">🔑 تغيير كلمة المرور</button>
+    </div>
+    <div id="adminProductsList"></div>
+  </div>
+</section>
+
+<section id="payment">
+<h2>💳 الدفع</h2>
+<div class="pay">
+  <h3>شام كاش</h3>
+  <p>استخدم كود الدفع العام التالي، ثم أرسل لنا تأكيد الدفع.</p>
+  <div class="code" id="cashCode">f36685918a555c1a8f359243e31df5b2</div>
+  <button class="btn copy" onclick="copyCode()">📋 نسخ كود شام كاش</button>
+  <p id="copied" style="text-align:center;margin:10px 0 0; color:#60a5fa;"></p>
+</div>
+</section>
+
+<section>
+<div class="contact">
+<h2>تواصل مع مركز كرم</h2>
+<div>📍 درعا – مدينة الحارة</div>
+<a class="phone" href="tel:0930430255">0930430255</a>
+<div class="actions" style="margin-top:15px;"><a class="btn primary" href="tel:0930430255">اتصل الآن</a></div>
+</div>
+</section>
+</main>
+
+<footer>© مركز كرم — جميع الحقوق محفوظة</footer>
+
+<script>
+function copyCode(){
+ const code=document.getElementById('cashCode').innerText.trim();
+ navigator.clipboard.writeText(code).then(()=>{
+   document.getElementById('copied').innerText='✅ تم نسخ الكود';
+ }).catch(()=>{
+   document.getElementById('copied').innerText='انسخ الكود يدوياً من الخانة أعلاه';
+ });
+}
+
+const PRODUCTS_KEY='markaz_karam_products_v2';
+const ADMIN_PASSWORD_KEY='markaz_karam_admin_password_v1';
+const UPDATE_NOTICE_KEY='markaz_karam_update_v1';
+const CURRENT_UPDATE_ID='update_2026_v1'; // قم بتغيير هذا المعرف كلما أردت إظهار إشعار جديد للزبائن
+const DEFAULT_ADMIN_PASSWORD='1234';
+
+function currencyLabel(c){return c==='USD'?'$':'ل.س'}
+let editingProductId=null;
+let operationsUnlocked=false;
+
+function checkUpdateBanner(){
+  const lastSeen = localStorage.getItem(UPDATE_NOTICE_KEY);
+  if(lastSeen !== CURRENT_UPDATE_ID){
+    document.getElementById('updateBanner').classList.remove('hidden');
+  }
+}
+function closeUpdateBanner(){
+  localStorage.setItem(UPDATE_NOTICE_KEY, CURRENT_UPDATE_ID);
+  document.getElementById('updateBanner').classList.add('hidden');
+}
+
+function getProducts(){
+  try{
+    const current=JSON.parse(localStorage.getItem(PRODUCTS_KEY)||'null');
+    if(Array.isArray(current)) return current;
+
+    const old=JSON.parse(localStorage.getItem('markaz_karam_products_v1')||'[]');
+    if(Array.isArray(old) && old.length){
+      const migrated=old.map(p=>({...p,category:p.category||'mobile'}));
+      localStorage.setItem(PRODUCTS_KEY,JSON.stringify(migrated));
+      return migrated;
+    }
+    return [];
+  }catch(e){return[]}
+}
+function saveProducts(a){localStorage.setItem(PRODUCTS_KEY,JSON.stringify(a))}
+function getAdminPassword(){return localStorage.getItem(ADMIN_PASSWORD_KEY)||DEFAULT_ADMIN_PASSWORD}
+
+function openOperations(){
+  document.getElementById('operationsLogin').classList.remove('hidden');
+  document.getElementById('operationsPanel').classList.add('hidden');
+  document.getElementById('adminPassword').focus();
+}
+function adminLogin(){
+  const pass=document.getElementById('adminPassword').value;
+  if(pass===getAdminPassword()){
+    operationsUnlocked=true;
+    document.getElementById('operationsLogin').classList.add('hidden');
+    document.getElementById('operationsPanel').classList.remove('hidden');
+    document.getElementById('adminPassword').value='';
+    renderAdminList();
+  }else{
+    document.getElementById('loginMessage').innerText='❌ كلمة المرور غير صحيحة.';
+  }
+}
+function adminLogout(){
+  operationsUnlocked=false;
+  editingProductId=null;
+  document.getElementById('operationsPanel').classList.add('hidden');
+  document.getElementById('operationsLogin').classList.add('hidden');
+  resetForm();
+}
+function setMessage(s){document.getElementById('adminMessage').innerText=s||''}
+function resetForm(){
+  editingProductId=null;
+  document.getElementById('productName').value='';
+  document.getElementById('productPrice').value='';
+  document.getElementById('productCurrency').value='SYP';
+  document.getElementById('productDescription').value='';
+  document.getElementById('productImage').value='';
+  document.getElementById('productCategory').value='mobile';
+}
+function cancelEdit(){resetForm();setMessage('')}
+function saveProduct(){
+  if(!operationsUnlocked)return;
+  const name=document.getElementById('productName').value.trim();
+  const price=document.getElementById('productPrice').value.trim();
+  const desc=document.getElementById('productDescription5']||document.getElementById('productDescription').value.trim();
+  const category=document.getElementById('productCategory').value;
+  const currency=document.getElementById('productCurrency').value;
+  const file=document.getElementById('productImage').files[0];
+
+  if(!name||!price){setMessage('⚠️ اكتب اسم المنتج والسعر أولاً.');return}
+
+  const finish=(image)=>{
+    const a=getProducts();
+    if(editingProductId){
+      const i=a.findIndex(p=>p.id===editingProductId);
+      if(i>=0)a[i]={...a[i],name,price,desc,category,currency:currency||a[i].currency||'SYP',image:image||a[i].image||''};
+    }else{
+      a.unshift({id:Date.now().toString(),name,price,desc,category,currency:currency||'SYP',image:image||''});
+    }
+    try{
+      saveProducts(a);
+      resetForm();
+      setMessage('✅ تم حفظ المنتج ووضعه في القسم الصحيح.');
+      renderProducts();
+      renderAdminList();
+    }catch(e){
+      setMessage('❌ تعذر الحفظ. جرّب صورة أصغر.');
+    }
+  };
+  if(file){
+    const r=new FileReader();
+    r.onload=()=>finish(r.result);
+    r.readAsDataURL(file);
+  }else finish('');
+}
+function editProduct(id){
+  if(!operationsUnlocked)return;
+  const p=getProducts().find(x=>x.id===id);if(!p)return;
+  editingProductId=id;
+  document.getElementById('productName').value=p.name||'';
+  document.getElementById('productPrice').value=p.price||'';
+  document.getElementById('productCurrency').value=p.currency||'SYP';
+  document.getElementById('productDescription').value=p.desc||'';
+  document.getElementById('productCategory').value=p.category||'mobile';
+  document.getElementById('productImage').value='';
+  document.getElementById('operationsPanel').scrollIntoView({behavior:'smooth'});
+  setMessage('✏️ تعدّل المنتج الآن. إذا لم تختر صورة جديدة ستبقى الصورة القديمة.');
+}
+function deleteProduct(id){
+  if(!operationsUnlocked)return;
+  if(!confirm('هل تريد حذف هذا المنتج؟'))return;
+  saveProducts(getProducts().filter(p=>p.id!==id));
+  renderProducts();
+  renderAdminList();
+  setMessage('🗑️ تم حذف المنتج.');
+}
+function esc(s){
+  return String(s).replace(/[&<>\"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','\"':'&quot;',"'":'&#039;'}[m]));
+}
+function categoryTitle(c){
+  return ({mobile:'الموبايلات',laptop:'اللابتوبات',accessory:'الإكسسوارات',recharge:'شحن التطبيقات والبرامج'})[c]||'الموبايلات';
+}
+function toggleCategory(id,button){
+  const box=document.getElementById(id);
+  const icon=button.querySelector('.toggle-icon');
+  box.classList.toggle('hidden');
+  if(icon) icon.textContent=box.classList.contains('hidden')?'＋':'−';
+}
+function renderCategory(id,category, filterText=''){
+  const g=document.getElementById(id);
+  let a=getProducts().filter(p=>(p.category||'mobile')===category);
+  
+  if(filterText){
+    a=a.filter(p => (p.name && p.name.toLowerCase().includes(filterText)) || (p.desc && p.desc.toLowerCase().includes(filterText)));
+  }
+
+  const blockContainer = g.parentElement;
+  if(!a.length){
+    if(filterText) {
+      blockContainer.classList.add('hidden');
+    } else {
+      blockContainer.classList.remove('hidden');
+      g.innerHTML='<div class="card empty-products" style="grid-column:1/-1">لا توجد منتجات في هذا القسم حالياً.</div>';
+    }
+    return;
+  }
+  blockContainer.classList.remove('hidden');
+  g.innerHTML=a.map(p=>`<article class="card product-card">
+    ${p.image?`<img class="product-img" src="${p.image}" alt="">`:'<div class="product-img" style="display:flex;align-items:center;justify-content:center;font-size:55px">📦</div>'}
+    <h3>${esc(p.name)}</h3>
+    <div class="product-price">${esc(p.price)} <span class="currency-label">${currencyLabel(p.currency||"SYP")}</span></div>
+    ${p.desc?`<p>${esc(p.desc)}</p>`:''}
+  </article>`).join('');
+}
+function renderProducts(filterText=''){
+  renderCategory('mobileProducts','mobile', filterText);
+  renderCategory('laptopProducts','laptop', filterText);
+  renderCategory('accessoryProducts','accessory', filterText);
+  renderCategory('rechargeProducts','recharge', filterText);
+}
+function filterProducts(){
+  const query = document.getElementById('productSearch').value.trim().toLowerCase();
+  renderProducts(query);
+}
+function renderAdminList(){
+  if(!operationsUnlocked)return;
+  const box=document.getElementById('adminProductsList');
+  const a=getProducts();
+  if(!a.length){box.innerHTML='<p class="admin-message">لا توجد منتجات.</p>';return}
+  box.innerHTML='<h4 style="margin-top:22px">📋 إدارة المنتجات الحالية</h4>'+
+    a.map(p=>`<div class="admin-list-item">
+      <span><b>${esc(p.name)}</b><br><small>${esc(p.price)} ${currencyLabel(p.currency||"SYP")} — ${esc(categoryTitle(p.category||'mobile'))}</small></span>
+      <span>
+        <button class="small-btn edit-btn" onclick="editProduct('${p.id}')">✏️</button>
+        <button class="small-btn delete-btn" onclick="deleteProduct('${p.id}')">🗑️</button>
+      </span>
+    </div>`).join('');
+}
+
+function changeAdminPassword(){
+  if(!operationsUnlocked)return;
+  const p=document.getElementById('newAdminPassword').value.trim();
+  if(p.length<4){setMessage('⚠️ كلمة المرور يجب أن تكون 4 أحرف/أرقام على الأقل.');return}
+  localStorage.setItem(ADMIN_PASSWORD_KEY,p);
+  document.getElementById('newAdminPassword').value='';
+  setMessage('✅ تم تغيير كلمة مرور غرفة العمليات.');
+}
+
+document.addEventListener('DOMContentLoaded',() => {
+  renderProducts();
+  checkUpdateBanner();
+});
+</script>
+</body>
+</html>
