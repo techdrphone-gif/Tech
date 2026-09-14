@@ -687,22 +687,20 @@ function currencyLabel(c){return c==='USD'?'$':'ل.س'}
 let editingProductId=null;
 let operationsUnlocked=false;
 
-// دالة فحص وجلب الإشعارات من تلغرام أوتوماتيكياً
+// دالة فحص وجلب الإشعارات من تلغرام مع حل مشطة الذاكرة المؤقتة للرسائل
 async function checkTelegramUpdates() {
   try {
-    const response = await fetch(`https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/getUpdates`);
+    const response = await fetch(`https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/getUpdates?allowed_updates=["message"]`);
     const data = await response.json();
     if(data.ok && data.result.length > 0) {
-      const latestMessage = data.result[data.result.length - 1].message;
-      if(latestMessage && latestMessage.text) {
-        const msgText = latestMessage.text;
-        const lastSeen = localStorage.getItem('telegram_last_msg');
-        if(lastSeen !== msgText) {
-          const banner = document.getElementById('updateBanner');
-          const textSpan = document.getElementById('updateBannerText');
-          textSpan.innerText = `📢 ${msgText}`;
-          banner.classList.remove('hidden');
-        }
+      // جلب آخر رسالة تم استقبالها بدقة
+      const latest = data.result[data.result.length - 1];
+      if(latest.message && latest.message.text) {
+        const msgText = latest.message.text;
+        const banner = document.getElementById('updateBanner');
+        const textSpan = document.getElementById('updateBannerText');
+        textSpan.innerText = `📢 ${msgText}`;
+        banner.classList.remove('hidden');
       }
     }
   } catch (error) {
@@ -711,18 +709,6 @@ async function checkTelegramUpdates() {
 }
 
 function closeUpdateBanner() {
-  try {
-    fetch(`https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/getUpdates`)
-      .then(res => res.json())
-      .then(data => {
-        if(data.ok && data.result.length > 0) {
-          const latestMessage = data.result[data.result.length - 1].message;
-          if(latestMessage && latestMessage.text) {
-            localStorage.setItem('telegram_last_msg', latestMessage.text);
-          }
-        }
-      });
-  } catch(e){}
   document.getElementById('updateBanner').classList.add('hidden');
 }
 
