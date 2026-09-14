@@ -108,23 +108,25 @@ header{
 .menu-toggle-btn:hover, .theme-toggle:hover, .call-btn-header:hover { border-color: var(--primary); color: var(--primary); }
 .call-btn-header { width: auto; padding: 0 16px; font-weight: 800; font-size: 14px; gap: 8px; }
 
-/* لوحة الإحصائيات العامة (أونلاين / المنتجات / التقييمات) */
+/* لوحة الإحصائيات المرتبة في الأسفل */
 .stats-bar {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
   gap: 15px;
-  margin-bottom: 30px;
+  margin-top: 35px;
+  padding-top: 25px;
+  border-top: 1px solid var(--border-color);
 }
 .stat-card {
-  background: var(--card-bg);
+  background: rgba(0,0,0,0.12);
   border: 1px solid var(--border-color);
-  border-radius: var(--radius);
-  padding: 18px;
+  border-radius: 14px;
+  padding: 14px;
   text-align: center;
-  box-shadow: var(--shadow);
 }
-.stat-card h4 { margin: 0 0 6px; font-size: 14px; color: var(--text-muted); }
-.stat-card .stat-val { font-size: 22px; font-weight: 900; color: var(--primary); }
+[data-theme="light"] .stat-card { background: rgba(0,0,0,0.02); }
+.stat-card h4 { margin: 0 0 4px; font-size: 13px; color: var(--text-muted); font-weight: 700; }
+.stat-card .stat-val { font-size: 18px; font-weight: 900; color: var(--primary); }
 
 /* القائمة الجانبية المنسدلة */
 .sidebar-overlay {
@@ -188,7 +190,7 @@ main{max-width:1100px;margin:auto;padding:30px 16px}
 .hero{
   background: var(--card-bg);
   border-radius: var(--radius);
-  padding: 50px 24px;
+  padding: 45px 24px;
   margin-bottom: 35px;
   text-align: center;
   box-shadow: var(--shadow);
@@ -196,9 +198,9 @@ main{max-width:1100px;margin:auto;padding:30px 16px}
 }
 .badge{display:inline-block;background:rgba(37,99,235,0.12);color:var(--primary);padding:8px 18px;border-radius:999px;font-weight:800;font-size:14px;margin-bottom:14px}
 h1{font-size:38px;margin:10px 0;font-weight:900;letter-spacing:-0.5px}
-.hero p{color: var(--text-muted); max-width: 600px; margin: 0 auto 25px; font-size:16px}
+.hero p{color: var(--text-muted); max-width: 600px; margin: 0 auto 22px; font-size:16px}
 
-.actions{display:flex; justify-content:center; gap:14px; flex-wrap:wrap}
+.actions{display:flex; justify-content:center; gap:14px; flex-wrap:wrap; margin-top: 15px;}
 
 .btn{
   display: inline-flex;
@@ -417,7 +419,14 @@ h2{font-size:28px;margin-bottom:20px;font-weight:900;letter-spacing:-0.5px}
   <h1>مركز كرم</h1>
   <p>وجهتك الشاملة للهواتف، اللابتوبات، الإكسسوارات وخدمات الشحن الرقمي بأفضل الأسعار في درعا - الحارة.</p>
   
-  <!-- لوحة الإحصائيات الفورية -->
+  <div class="actions">
+    <a class="btn primary" href="tel:0930430255">📞 تواصل معنا الآن</a>
+    <a class="btn secondary" href="#payment">💳 طرق الدفع</a>
+  </div>
+  
+  <p style="margin-top:16px; font-weight:800; color:var(--text-muted); font-size:14px;">📍 درعا – مدينة الحارة</p>
+
+  <!-- لوحة الإحصائيات الفورية المرتبة أسفل القسم الرئيسي -->
   <div class="stats-bar">
     <div class="stat-card">
       <h4>📦 إجمالي المنتجات</h4>
@@ -428,16 +437,10 @@ h2{font-size:28px;margin-bottom:20px;font-weight:900;letter-spacing:-0.5px}
       <div id="userStatusVal" class="stat-val" style="color:var(--accent);">🟢 متصل (Online)</div>
     </div>
     <div class="stat-card">
-      <h4>⭐ متوسط التقييم العام</h4>
+      <h4>⭐ متوسط التقييم</h4>
       <div id="avgRatingVal" class="stat-val">4.9 / 5</div>
     </div>
   </div>
-
-  <div class="actions">
-    <a class="btn primary" href="tel:0930430255">📞 تواصل معنا الآن</a>
-    <a class="btn secondary" href="#payment">💳 طرق الدفع</a>
-  </div>
-  <p style="margin-top:20px; font-weight:800; color:var(--text-muted); font-size:15px;">📍 درعا – مدينة الحارة</p>
 </section>
 
 <!-- قسم المنتجات -->
@@ -621,7 +624,6 @@ function currencyLabel(c){return c==='USD'?'$':'ل.س'}
 let editingProductId=null;
 let operationsUnlocked=false;
 
-// فحص حالة الاتصال (Online / Offline)
 function checkOnlineStatus() {
   const statusEl = document.getElementById('userStatusVal');
   if (navigator.onLine) {
@@ -652,7 +654,6 @@ async function loadCloudProducts() {
   }
 }
 
-// تحديث الإحصائيات والعدادات لكل قسم
 function updateStatsCounters() {
   document.getElementById('totalProductsCount').innerText = globalProducts.length;
 
