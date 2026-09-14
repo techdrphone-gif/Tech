@@ -1,5 +1,14 @@
 [
   {
+    "id": "1789413693591",
+    "name": "Samsung A54 5G",
+    "price": "200$",
+    "desc": "الجهاز بدون كرتونه",
+    "category": "mobile",
+    "currency": "USD",
+    "image": ""
+  },
+  {
     "id": "1789413595145",
     "name": "S24 ULTRA",
     "price": "775",
