@@ -105,7 +105,6 @@ header{
 }
 .menu-toggle-btn:hover { border-color: var(--primary); color: var(--primary); }
 
-/* أزرار الهيدر الإضافية */
 .theme-toggle, .call-btn-header {
   background: var(--card-bg);
   border: 2px solid var(--border-color);
@@ -123,7 +122,7 @@ header{
 }
 .theme-toggle:hover, .call-btn-header:hover { border-color: var(--primary); color: var(--primary); }
 
-/* القائمة الجانبية المنسدلة (Sidebar Drawer) */
+/* القائمة الجانبية العائمة (Sidebar Drawer) */
 .sidebar-overlay {
   position: fixed;
   inset: 0;
@@ -192,7 +191,6 @@ header{
 [data-theme="dark"] .sidebar-menu a { background: rgba(255,255,255,0.03); }
 .sidebar-menu a:hover { background: var(--primary); color: #fff; transform: translateX(-4px); }
 
-/* المحتوى الرئيسي */
 main{max-width:1100px;margin:auto;padding:24px 16px}
 
 .hero{
@@ -532,9 +530,9 @@ h2{font-size:26px;margin-bottom:18px;font-weight:800;color:var(--text-main)}
     <div id="notificationTab" class="admin-tab-content hidden">
       <div style="background:var(--bg-gradient); border:1px solid var(--border-color); border-radius:14px; padding:18px; text-align:right;">
         <h4 style="margin-top:0; color:var(--primary)">📢 إرسال إشعار فوري لجميع الزبائن</h4>
-        <p style="font-size:14px; color:var(--text-muted); margin-bottom:12px;">اكتب نص العرض أو الإشعار الجديد أدناه. سيظهر كشريط علوي لكل من يفتح التطبيق:</p>
+        <p style="font-size:14px; color:var(--text-muted); margin-bottom:12px;">اكتب نص العرض أو الإشعار الجديد أدناه. اضغط على الزر وسيرسل مباشرة إلى جيت هاب:</p>
         <textarea id="cloudNotificationText" class="full" placeholder="مثال: 🔥 عروض مميزة على كافة الهواتف، تفقد القسم الآن!"></textarea>
-        <button class="btn primary" type="button" style="margin-top:12px;" onclick="publishCloudNotification()">🚀 نشر الإشعار للجميع</button>
+        <button class="btn primary" type="button" style="margin-top:12px;" onclick="publishCloudNotification()">🚀 نشر الإشعار للجميع مباشرة</button>
         <p id="notificationStatus" class="admin-message"></p>
       </div>
     </div>
@@ -575,13 +573,13 @@ h2{font-size:26px;margin-bottom:18px;font-weight:800;color:var(--text-main)}
 <footer>© مركز كرم — جميع الحقوق محفوظة</footer>
 
 <script>
-// تفعيل وتشغيل القائمة الجانبية
+// القائمة الجانبية
 function toggleSidebar() {
   document.getElementById('sidebar').classList.toggle('active');
   document.getElementById('sidebarOverlay').classList.toggle('active');
 }
 
-// نظام الثيمات (داكن / فاتح)
+// الثيمات
 function toggleTheme() {
   const html = document.documentElement;
   const currentTheme = html.getAttribute('data-theme');
@@ -590,7 +588,6 @@ function toggleTheme() {
   localStorage.setItem('markaz_karam_theme', newTheme);
 }
 
-// فتح قسم محدد عند النقر عليه من القائمة الجانبية
 function openCat(id) {
   const box = document.getElementById(id);
   if (box.classList.contains('hidden')) {
@@ -649,13 +646,54 @@ function closeUpdateBanner() {
     });
 }
 
-function publishCloudNotification(){
+// دالة الإرسال الآلي المباشر عبر زر التطبيق مع التوكن المدمج
+async function publishCloudNotification(){
   const msg = document.getElementById('cloudNotificationText').value.trim();
   if(!msg){alert('الرجاء كتابة نص الإشعار أولاً'); return;}
-  const jsonOutput = `{\n  "message": "${msg}"\n}`;
-  navigator.clipboard.writeText(jsonOutput).then(() => {
-    document.getElementById('notificationStatus').innerText = '✅ تم نسخ كود الإشعار! الصقه في ملف update.json على جيت هاب واحفظ التغييرات ليصل للجميع.';
-  });
+
+  const statusEl = document.getElementById('notificationStatus');
+  statusEl.innerText = '⏳ جاري إرسال ونشر الإشعار للسحابة...';
+
+  // الرمز الخاص بك مدمج هنا بشكل آلي مباشر
+  const token = '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';
+  const repoOwner = 'techdrphone-gif';
+  const repoName = 'Tech';
+  const filePath = 'update.json';
+  const url = `https://api.github.com/repos/${repoOwner}/${repoName}/contents/${filePath}`;
+
+  try {
+    const getRes = await fetch(url, {
+      headers: { 'Authorization': `token ${token}` }
+    });
+    if(!getRes.ok) throw new Error('فشل الاتصال بجيت هاب. تحقق من الاتصال بالإنترنت.');
+    const fileData = await getRes.json();
+    const sha = fileData.sha;
+
+    const newContentObj = { message: msg };
+    const encodedContent = btoa(unescape(encodeURIComponent(JSON.stringify(newContentObj, null, 2))));
+
+    const updateRes = await fetch(url, {
+      method: 'PUT',
+      headers: {
+        'Authorization': `token ${token}`,
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        message: 'Update notification via app operations room',
+        content: encodedContent,
+        sha: sha
+      })
+    });
+
+    if(updateRes.ok){
+      statusEl.innerText = '✅ تم إرسال ونشر الإشعار بنجاح وسيراه جميع الزبائن فوراً!';
+      document.getElementById('cloudNotificationText').value = '';
+    } else {
+      throw new Error('فشل حفظ التعديل على السيرفر.');
+    }
+  } catch (error) {
+    statusEl.innerText = '❌ خطأ: ' + error.message;
+  }
 }
 
 function getProducts(){
